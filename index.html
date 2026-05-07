@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gospel Ibekwe — Virtual Assistant & Customer Service Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+:root{
+  --bg:#F9F8F6;
+  --surface:#FFFFFF;
+  --surface2:#F2F0EC;
+  --border:#E4E1DA;
+  --accent:#1A3C5E;
+  --accent2:#2E6DA4;
+  --accent3:#C8862A;
+  --text:#1A1A1A;
+  --muted:#5A5A5A;
+  --light:#888888;
+  --success:#2E7D5A;
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(249,248,246,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5vw}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:64px}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent);text-decoration:none}
+.nav-logo span{color:var(--accent3)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.15s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:8px 20px;border-radius:8px;text-decoration:none;transition:opacity 0.15s}
+.nav-cta:hover{opacity:0.85}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--accent);border-radius:2px;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:1.5rem 5vw;z-index:99}
+.mobile-menu a{display:block;padding:0.7rem 0;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)}
+.mobile-menu a:hover{color:var(--accent)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:80px 5vw 60px;background:linear-gradient(160deg,#F9F8F6 0%,#EEF2F7 50%,#F9F8F6 100%)}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(26,60,94,0.08);border:1px solid rgba(26,60,94,0.2);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:500;color:var(--accent);font-family:'DM Mono',monospace;letter-spacing:0.05em;margin-bottom:1.2rem}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,5vw,60px);line-height:1.05;color:var(--accent);margin-bottom:0.5rem}
+.hero h1 span{color:var(--accent3)}
+.hero-sub{font-size:18px;color:var(--muted);margin-bottom:1.5rem;line-height:1.5;max-width:480px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2rem}
+.hero-tag{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--muted);font-family:'DM Mono',monospace}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:10px;text-decoration:none;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--accent);font-size:14px;font-weight:600;padding:12px 28px;border-radius:10px;text-decoration:none;border:1.5px solid var(--accent);transition:all 0.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-secondary:hover{background:var(--accent);color:#fff}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;box-shadow:0 8px 40px rgba(0,0,0,0.06)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-item{background:var(--surface2);border-radius:12px;padding:1rem;text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent)}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:2px}
+.avail-badge{background:rgba(46,125,90,0.1);border:1px solid rgba(46,125,90,0.3);border-radius:10px;padding:0.8rem 1rem;display:flex;align-items:center;gap:10px}
+.avail-dot{width:10px;height:10px;border-radius:50%;background:var(--success);flex-shrink:0;animation:pulse 2s infinite}
+.avail-text{font-size:13px;font-weight:500;color:var(--success)}
+
+/* SECTION WRAPPER */
+.section{padding:80px 5vw}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent3);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:0.5rem}
+.section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);color:var(--accent);margin-bottom:0.5rem}
+.section-sub{font-size:16px;color:var(--muted);max-width:560px;margin-bottom:3rem}
+
+/* ABOUT */
+.about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.about-text strong{color:var(--text)}
+.about-highlights{display:flex;flex-direction:column;gap:12px;margin-top:1.5rem}
+.highlight-item{display:flex;align-items:flex-start;gap:12px;background:var(--surface2);border-radius:12px;padding:1rem}
+.hi-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.hi-title{font-weight:600;font-size:14px;color:var(--text);margin-bottom:2px}
+.hi-desc{font-size:13px;color:var(--muted)}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.2s;cursor:default}
+.service-card:hover{border-color:var(--accent2);box-shadow:0 4px 20px rgba(26,60,94,0.08);transform:translateY(-2px)}
+.service-icon{font-size:32px;margin-bottom:1rem}
+.service-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--accent);margin-bottom:0.5rem}
+.service-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.service-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:1rem}
+.s-tag{background:var(--surface2);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+
+/* EXPERIENCE */
+.exp{background:var(--surface)}
+.timeline{display:flex;flex-direction:column;gap:0}
+.exp-card{display:grid;grid-template-columns:200px 1fr;gap:2rem;position:relative;padding-bottom:2.5rem}
+.exp-card:not(:last-child)::after{content:'';position:absolute;left:199px;top:12px;bottom:0;width:1px;background:var(--border)}
+.exp-date{padding-top:4px;text-align:right}
+.exp-date-main{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent2);font-weight:400}
+.exp-date-tag{display:inline-block;margin-top:4px;font-size:10px;padding:2px 8px;border-radius:10px;font-family:'DM Mono',monospace}
+.tag-vol{background:rgba(200,134,42,0.12);color:var(--accent3);border:1px solid rgba(200,134,42,0.3)}
+.tag-free{background:rgba(46,109,164,0.1);color:var(--accent2);border:1px solid rgba(46,109,164,0.25)}
+.exp-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);flex-shrink:0;position:absolute;left:194px;top:4px}
+.exp-content{padding-left:2rem}
+.exp-company{font-size:12px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;font-family:'DM Mono',monospace}
+.exp-role{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:var(--text);margin-bottom:0.5rem}
+.exp-intro{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:0.8rem;font-style:italic}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
+.exp-bullets li{font-size:14px;color:var(--muted);line-height:1.5;padding-left:1.2rem;position:relative}
+.exp-bullets li::before{content:"–";position:absolute;left:0;color:var(--accent3)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.skill-group{}
+.skill-group-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--accent);margin-bottom:0.8rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:7px}
+.skill-tag{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;transition:all 0.15s}
+.skill-tag:hover{border-color:var(--accent2);color:var(--accent2);background:#EEF4FA}
+
+/* TESTIMONIALS */
+.test{background:linear-gradient(160deg,#EEF2F7,#F9F8F6)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.test-stars{color:var(--accent3);font-size:16px;margin-bottom:0.8rem;letter-spacing:2px}
+.test-text{font-size:14px;color:var(--muted);line-height:1.7;font-style:italic;margin-bottom:1rem}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#fff}
+.av-blue{background:var(--accent2)}
+.av-gold{background:var(--accent3)}
+.av-green{background:var(--success)}
+.test-name{font-weight:600;font-size:13px;color:var(--text)}
+.test-role{font-size:12px;color:var(--light)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:16px;margin-top:1rem}
+.contact-item{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem}
+.contact-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.contact-label{font-size:11px;font-weight:600;color:var(--light);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px}
+.contact-val{font-size:14px;font-weight:500;color:var(--text)}
+.contact-val a{color:var(--accent2);text-decoration:none}
+.contact-val a:hover{text-decoration:underline}
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.form-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--accent);margin-bottom:1.5rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color 0.15s;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent2)}
+.form-group textarea{min-height:120px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-submit{width:100%;background:var(--accent);color:#fff;border:none;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;padding:13px;border-radius:10px;cursor:pointer;transition:all 0.15s;margin-top:0.5rem}
+.form-submit:hover{background:var(--accent2);transform:translateY(-1px)}
+.form-note{font-size:12px;color:var(--light);text-align:center;margin-top:0.8rem}
+
+/* FOOTER */
+footer{background:var(--accent);color:rgba(255,255,255,0.7);padding:2.5rem 5vw;text-align:center}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-name{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#fff;margin-bottom:0.4rem}
+.footer-tagline{font-size:13px;margin-bottom:1.5rem}
+.footer-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.footer-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;transition:color 0.15s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px}
+
+/* FORM SUCCESS */
+.form-success{display:none;background:rgba(46,125,90,0.1);border:1px solid rgba(46,125,90,0.3);border-radius:10px;padding:1rem;text-align:center;color:var(--success);font-weight:500;font-size:14px;margin-top:1rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .test-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .exp-card{grid-template-columns:1fr;gap:0.5rem}
+  .exp-card::after{display:none}
+  .exp-dot{display:none}
+  .exp-date{text-align:left}
+  .exp-content{padding-left:0}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .services-grid{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Gospel<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#testimonials" onclick="closeMenu()">Testimonials</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#contact" onclick="closeMenu()" style="color:var(--accent);font-weight:700;border:none;margin-top:0.5rem">→ Hire Me</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="badge-dot"></span> Available for Remote Work</div>
+      <h1>Gospel<br/><span>Ibekwe</span></h1>
+      <p class="hero-sub">Virtual Assistant & Customer Service Professional with 5+ years supporting executives, managing clients, and delivering exceptional service across three continents.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Virtual Assistant</span>
+        <span class="hero-tag">Executive Support</span>
+        <span class="hero-tag">Customer Service</span>
+        <span class="hero-tag">CRM • HubSpot</span>
+        <span class="hero-tag">Lagos, Nigeria 🇳🇬</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Work With Me →</a>
+        <a href="#experience" class="btn-secondary">View Experience</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-num">5+</div>
+          <div class="stat-lbl">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">95%</div>
+          <div class="stat-lbl">CSAT Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">30%</div>
+          <div class="stat-lbl">Retention Boost</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-lbl">Countries Served</div>
+        </div>
+      </div>
+      <div class="avail-badge">
+        <div class="avail-dot"></div>
+        <div class="avail-text">Open to full-time remote roles — available immediately</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About Me</div>
+        <div class="section-title">Not just support.<br/>A partner you can rely on.</div>
+        <div class="about-text">
+          <p>I've spent the past five years being the person clients and executives turn to when things need to be handled — and handled properly. I started in customer service and grew into direct executive support, managing schedules, filtering communication, and keeping operations running smoothly without being asked twice.</p>
+          <p>I've worked across three time zones — delivering remote customer service for clients in <strong>the UK and Brazil</strong> while managing executive support for a Managing Director in Lagos and volunteering as <strong>Executive Assistant to a Senior Pastor</strong> at Dominion City Church HQ.</p>
+          <p>I take every client interaction personally. Whether someone is chasing a complaint or an executive needs their calendar restructured, the approach is the same: show up, pay attention, follow through.</p>
+        </div>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <div class="hi-icon">🌍</div>
+          <div>
+            <div class="hi-title">International Remote Experience</div>
+            <div class="hi-desc">Delivered CS for clients in UK and Brazil, working within their time zones and service standards.</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">📋</div>
+          <div>
+            <div class="hi-title">Executive-Level Support</div>
+            <div class="hi-desc">VA to an MD and Executive Assistant to a Senior Pastor — complex scheduling, discretion, zero dropped balls.</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">📈</div>
+          <div>
+            <div class="hi-title">Proven Business Impact</div>
+            <div class="hi-desc">95%+ CSAT rate and a retention process that improved repeat business by 30% at Range Rover Doctor.</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">🎓</div>
+          <div>
+            <div class="hi-title">HubSpot Certified</div>
+            <div class="hi-desc">Inbound Sales & Customer Service certified. CRM-proficient across HubSpot, Salesforce, and Zendesk.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-label">What I Offer</div>
+    <div class="section-title">Services</div>
+    <p class="section-sub">Available for full-time, part-time, and contract remote engagements worldwide.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🗂️</div>
+        <div class="service-title">Executive Virtual Assistant</div>
+        <div class="service-desc">Full calendar management, email inbox management, travel coordination, meeting prep, and acting as a reliable point of contact on behalf of founders, MDs, and executives.</div>
+        <div class="service-tags">
+          <span class="s-tag">Calendar</span>
+          <span class="s-tag">Inbox</span>
+          <span class="s-tag">Travel</span>
+          <span class="s-tag">Meetings</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎧</div>
+        <div class="service-title">Customer Service Representative</div>
+        <div class="service-desc">Inbound and outbound client communication via phone, email, and live chat. Complaint handling, escalation management, and first-response resolution with a 95%+ satisfaction track record.</div>
+        <div class="service-tags">
+          <span class="s-tag">Calls</span>
+          <span class="s-tag">Email</span>
+          <span class="s-tag">Chat</span>
+          <span class="s-tag">Resolution</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <div class="service-title">CRM Management</div>
+        <div class="service-desc">Maintaining clean, accurate CRM records, logging interactions, managing pipelines, and building follow-up processes that keep clients engaged and retention high.</div>
+        <div class="service-tags">
+          <span class="s-tag">HubSpot</span>
+          <span class="s-tag">Salesforce</span>
+          <span class="s-tag">Zendesk</span>
+          <span class="s-tag">Follow-ups</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📝</div>
+        <div class="service-title">Administrative Support</div>
+        <div class="service-desc">Document preparation, meeting minutes, research, data entry, reports, and all the operational tasks that keep an executive or small team running without friction.</div>
+        <div class="service-tags">
+          <span class="s-tag">Docs</span>
+          <span class="s-tag">Reports</span>
+          <span class="s-tag">Research</span>
+          <span class="s-tag">Data Entry</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <div class="service-title">International Remote Support</div>
+        <div class="service-desc">Experienced working across time zones for UK and Brazil-based clients. Comfortable adapting to different business cultures, communication styles, and service expectations.</div>
+        <div class="service-tags">
+          <span class="s-tag">UK timezone</span>
+          <span class="s-tag">Brazil</span>
+          <span class="s-tag">Async</span>
+          <span class="s-tag">Cross-cultural</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <div class="service-title">Client Retention & Follow-Up</div>
+        <div class="service-desc">Designing and executing follow-up systems that keep clients coming back. The process I built at Range Rover Doctor improved client retention by 30%.</div>
+        <div class="service-tags">
+          <span class="s-tag">Retention</span>
+          <span class="s-tag">Follow-ups</span>
+          <span class="s-tag">Re-engagement</span>
+          <span class="s-tag">Loyalty</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section exp" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Work History</div>
+    <div class="section-title">Experience</div>
+    <p class="section-sub">Five years of client-facing and executive support across Lagos, the UK, and Brazil.</p>
+
+    <div class="timeline">
+
+      <div class="exp-card">
+        <div class="exp-date">
+          <div class="exp-date-main">2020 – 2025</div>
+        </div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-company">Range Rover Doctor · Lagos, Nigeria (Remote)</div>
+          <div class="exp-role">Virtual Assistant to the Managing Director</div>
+          <div class="exp-intro">Grew from a customer service role into direct executive support — managing communication, scheduling, and operations for a high-end automotive service company.</div>
+          <ul class="exp-bullets">
+            <li>Managed the MD's calendar, meetings, and appointments across multiple stakeholders with zero scheduling conflicts</li>
+            <li>Handled all inbound and outbound client communication on behalf of the MD and business</li>
+            <li>Maintained CRM records daily, logging interactions and flagging unresolved issues for resolution</li>
+            <li>Implemented a client follow-up system that improved retention by 30% and drove consistent referrals</li>
+            <li>Maintained a 95%+ customer satisfaction rate across all client interactions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-date">
+          <div class="exp-date-main">2023 – Present</div>
+          <div class="exp-date-tag tag-vol">Voluntary</div>
+        </div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-company">Dominion City Church HQ · Lagos, Nigeria</div>
+          <div class="exp-role">Executive Assistant to the Senior Pastor</div>
+          <div class="exp-intro">Took on this role voluntarily — managing pastoral schedules, correspondence, and church operations at headquarters level.</div>
+          <ul class="exp-bullets">
+            <li>Managed the Senior Pastor's calendar, correspondence, and scheduling across services, meetings, and external engagements</li>
+            <li>Prepared meeting agendas, took minutes, and followed up on action items with department heads</li>
+            <li>Coordinated logistics for large-scale church events including venue, communication, and volunteer coordination</li>
+            <li>Drafted official communications, announcements, and materials for pastoral distribution</li>
+            <li>Handled sensitive information with full discretion at all times</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-date">
+          <div class="exp-date-main">2022 – 2023</div>
+          <div class="exp-date-tag tag-free">Freelance</div>
+        </div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-company">UK-Based E-Commerce Client · Remote</div>
+          <div class="exp-role">Freelance Customer Service Representative</div>
+          <div class="exp-intro">Contracted to deliver customer-facing support within UK business hours and brand standards.</div>
+          <ul class="exp-bullets">
+            <li>Handled customer inquiries across email and live chat covering orders, returns, and complaints</li>
+            <li>Maintained accurate CRM records and escalated complex cases through the correct channels</li>
+            <li>Collaborated with the logistics team remotely to resolve fulfilment issues and communicate resolutions</li>
+            <li>Delivered consistent, professional service aligned with UK consumer expectations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-date">
+          <div class="exp-date-main">2021 – 2022</div>
+          <div class="exp-date-tag tag-free">Freelance</div>
+        </div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-company">Brazil-Based SaaS Client · Remote</div>
+          <div class="exp-role">Freelance Customer Service Representative</div>
+          <div class="exp-intro">Delivered English-language support for an international SaaS product from a Brazil-headquartered team.</div>
+          <ul class="exp-bullets">
+            <li>Managed onboarding queries, billing questions, and product troubleshooting for global users</li>
+            <li>Maintained high first-response and resolution rates across support tickets</li>
+            <li>Worked across time zones with a fully remote team, flagging recurring issues to the product team</li>
+            <li>Contributed to a shared knowledge base with FAQs and resolution guides</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-date">
+          <div class="exp-date-main">2019 – 2020</div>
+          <div class="exp-date-tag tag-free">Freelance</div>
+        </div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-company">Multiple International Clients · Remote</div>
+          <div class="exp-role">Freelance Customer Support & Virtual Assistant</div>
+          <div class="exp-intro">Early freelance work that shaped how I approach client relationships and remote communication.</div>
+          <ul class="exp-bullets">
+            <li>Provided administrative and customer support across several short-term and ongoing remote engagements</li>
+            <li>Managed executive inboxes, coordinated schedules, and handled client correspondence</li>
+            <li>Conducted research and supported project planning for founders and managers</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-label">Capabilities</div>
+    <div class="section-title">Skills & Tools</div>
+    <p class="section-sub">Everything I bring to a remote role, day one.</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Customer Support</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Inbound Calls</span>
+          <span class="skill-tag">Outbound Calls</span>
+          <span class="skill-tag">Email Support</span>
+          <span class="skill-tag">Live Chat</span>
+          <span class="skill-tag">Complaint Resolution</span>
+          <span class="skill-tag">Escalation Handling</span>
+          <span class="skill-tag">First-Response</span>
+          <span class="skill-tag">Ticket Management</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Virtual Assistant</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Calendar Management</span>
+          <span class="skill-tag">Inbox Management</span>
+          <span class="skill-tag">Travel Coordination</span>
+          <span class="skill-tag">Meeting Minutes</span>
+          <span class="skill-tag">Document Preparation</span>
+          <span class="skill-tag">Research</span>
+          <span class="skill-tag">Event Coordination</span>
+          <span class="skill-tag">Executive Support</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">CRM & Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HubSpot ✓ Certified</span>
+          <span class="skill-tag">Salesforce</span>
+          <span class="skill-tag">Zendesk</span>
+          <span class="skill-tag">Freshdesk</span>
+          <span class="skill-tag">Notion</span>
+          <span class="skill-tag">Trello</span>
+          <span class="skill-tag">Asana</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Communication & Productivity</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Google Workspace</span>
+          <span class="skill-tag">Microsoft Office 365</span>
+          <span class="skill-tag">Slack</span>
+          <span class="skill-tag">Zoom</span>
+          <span class="skill-tag">Microsoft Teams</span>
+          <span class="skill-tag">WhatsApp Business</span>
+          <span class="skill-tag">Loom</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Active Listening</span>
+          <span class="skill-tag">Empathy</span>
+          <span class="skill-tag">Patience Under Pressure</span>
+          <span class="skill-tag">Conflict Resolution</span>
+          <span class="skill-tag">Discretion</span>
+          <span class="skill-tag">Time Management</span>
+          <span class="skill-tag">Reliability</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Education & Certifications</div>
+        <div class="skill-tags">
+          <span class="skill-tag">B.Sc. Business Admin — FUTO</span>
+          <span class="skill-tag">HubSpot Inbound Sales</span>
+          <span class="skill-tag">HubSpot Customer Service</span>
+          <span class="skill-tag">Google IT Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section test" id="testimonials">
+  <div class="section-inner">
+    <div class="section-label">Social Proof</div>
+    <div class="section-title">What People Say</div>
+    <p class="section-sub">Feedback from clients and colleagues across my career.</p>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"Gospel is the most reliable VA I've ever worked with. She managed my entire calendar and inbox for two years and I never missed an important meeting. Completely trustworthy and proactive."</div>
+        <div class="test-author">
+          <div class="test-avatar av-blue">DM</div>
+          <div>
+            <div class="test-name">D. Morgan</div>
+            <div class="test-role">Managing Director, Range Rover Doctor</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"We hired Gospel for customer support and she went above what we expected. Response times were excellent, customers loved her, and she figured out our processes faster than any contractor we've had."</div>
+        <div class="test-author">
+          <div class="test-avatar av-gold">SK</div>
+          <div>
+            <div class="test-name">S. Kowalski</div>
+            <div class="test-role">Operations Lead, UK E-Commerce Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"Gospel handled our English-speaking customer base with incredible professionalism. She communicated clearly across time zones and our satisfaction scores improved noticeably during her contract."</div>
+        <div class="test-author">
+          <div class="test-avatar av-green">RC</div>
+          <div>
+            <div class="test-name">R. Carvalho</div>
+            <div class="test-role">Customer Success Manager, Brazil SaaS Client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact" style="background:var(--surface)">
+  <div class="section-inner">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Let's Work Together</div>
+    <p class="section-sub">Available immediately for remote roles — full-time, part-time, or contract. Worldwide.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val"><a href="mailto:Ibekwegospel43@gmail.com">Ibekwegospel43@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Phone / WhatsApp</div>
+              <div class="contact-val"><a href="tel:+2349166739341">+234 916 673 9341</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-val">Lagos, Nigeria · Remote-Ready Worldwide</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Availability</div>
+              <div class="contact-val">Immediate · Open to UK, US, AU & EU timezone clients</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💼</div>
+            <div>
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-val"><a href="https://linkedin.com/in/gospel-ibekwe-509654273" target="_blank">linkedin.com/in/gospel-ibekwe-509654273</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">Send me a message</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="fname" placeholder="Jane Smith" />
+          </div>
+          <div class="form-group">
+            <label>Company (optional)</label>
+            <input type="text" id="fcompany" placeholder="Acme Inc." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="femail" placeholder="jane@company.com" />
+        </div>
+        <div class="form-group">
+          <label>Role Type</label>
+          <select id="frole">
+            <option value="">Select a role type...</option>
+            <option>Virtual Assistant (Full-time)</option>
+            <option>Virtual Assistant (Part-time)</option>
+            <option>Customer Service Representative</option>
+            <option>Executive Assistant</option>
+            <option>Freelance / Contract</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="fmessage" placeholder="Tell me about the role and what you're looking for..."></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send Message →</button>
+        <div class="form-note">I respond within 24 hours, usually much sooner.</div>
+        <div class="form-success" id="formSuccess">✓ Message sent! I'll be in touch within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-name">Gospel Ibekwe</div>
+    <div class="footer-tagline">Virtual Assistant · Customer Service · Executive Support · Remote Worldwide</div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="mailto:Ibekwegospel43@gmail.com">Email Me</a>
+      <a href="https://linkedin.com/in/gospel-ibekwe-509654273" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-copy">© 2026 Gospel Ibekwe · Lagos, Nigeria · Open to remote work worldwide</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').style.display = 'none';
+}
+
+// Close mobile menu on outside click
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  if (!m.contains(e.target) && !h.contains(e.target)) m.style.display = 'none';
+});
+
+// Smooth active nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    a.style.fontWeight = a.getAttribute('href') === '#' + current ? '600' : '';
+  });
+});
+
+// Contact form — opens mailto with filled content
+function submitForm() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const company = document.getElementById('fcompany').value.trim();
+  const role = document.getElementById('frole').value;
+  const message = document.getElementById('fmessage').value.trim();
+
+  if (!name || !email || !message) {
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+
+  const subject = encodeURIComponent('Enquiry from ' + name + (company ? ' at ' + company : '') + (role ? ' — ' + role : ''));
+  const body = encodeURIComponent(
+    'Hi Gospel,\n\n' + message +
+    '\n\n---\nFrom: ' + name +
+    (company ? '\nCompany: ' + company : '') +
+    '\nEmail: ' + email +
+    (role ? '\nRole type: ' + role : '')
+  );
+
+  window.location.href = 'mailto:Ibekwegospel43@gmail.com?subject=' + subject + '&body=' + body;
+
+  document.getElementById('formSuccess').style.display = 'block';
+  setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+}
+
+// Animate stats on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.style.opacity = '1';
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.service-card, .test-card, .exp-card, .highlight-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transition = 'opacity 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
